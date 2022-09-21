@@ -31,6 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           poetry config virtualenvs.in-project true
+          poetry lock -n
           poetry install
 
       - name: PyInstaller
