@@ -6,8 +6,14 @@ Experimental scripts to generate sound signal based on in-vitro neural spike sig
 
 ### OSC Server
 
-To launch test osc-server:
+To launch test osc-server, use CLI tool:
 
 ```sh
-osc-listener
+-> % osc-listener --help
+Usage: osc-listener [OPTIONS]
+
+Options:
+    --ip TEXT       The ip to listen
+    --port INTEGER  The port to listen
+    --help          Show this message and exit.
 ```

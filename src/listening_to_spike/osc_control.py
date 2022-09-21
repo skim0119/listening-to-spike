@@ -7,9 +7,12 @@ import random
 import time
 
 from pythonosc import udp_client
+from spike_load import signal_load
 
 
 def run(path, ip, port):
+    signal = signal_load(path)
+
     client = udp_client.SimpleUDPClient(ip, port)
 
     for x in range(10):
