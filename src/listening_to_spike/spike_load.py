@@ -1,9 +1,13 @@
 import numpy as np
-from miv import datasets
+from miv.io import DataManager
+from miv.signal.filter import ButterBandpass
 
 
 def signal_load(path):  # TODO: read actual data
-    experiments = datasets.optogenetic.load_data()
-    experiments.tree()
+    filters = ButterBandpass(lowcut=300, highcut=3000, order=4)
 
-    return 30_000, np.random.random(100, 40)
+    data = DataManager(path)[0]
+    with data.load() as (signal, timestamps, sampling_rate):
+        signal = filters(signal, sampling_rate)
+
+    return sampling_rate, signal

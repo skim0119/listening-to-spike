@@ -21,15 +21,20 @@ def print_compute_handler(unused_addr, args, volume):
         pass
 
 
+def default_handler(address, *args):
+    print(f"Default {address}: {args}")
+
+
 @click.command()
 @click.option("--ip", default="127.0.0.1", help="The ip to listen")
 @click.option("--port", type=int, default=5005, help="The port to listen")
 def main(ip, port):
     dispatcher = Dispatcher()
     dispatcher.map("/filter", print)
+    dispatcher.map("/channel0", print)
     dispatcher.map("/volume", print_volume_handler, "Volume")
     dispatcher.map("/logvolume", print_compute_handler, "Log volume", math.log)
-
+    dispatcher.set_default_handler(default_handler)
     server = osc_server.ThreadingOSCUDPServer((ip, port), dispatcher)
     print("Serving on {}".format(server.server_address))
     server.serve_forever()

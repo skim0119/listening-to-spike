@@ -1,13 +1,8 @@
-"""Small example OSC client
-
-This program sends 10 random values between 0.0 and 1.0 to the /filter address,
-waiting for 1 seconds between each value.
-"""
 import random
 import time
 
 from pythonosc import osc_message_builder, udp_client, osc_bundle_builder
-from spike_load import signal_load
+from listening_to_spike.spike_load import signal_load
 
 
 def test_run(ip, port):
@@ -21,6 +16,7 @@ def test_run(ip, port):
 def run(path, ip, port):
     oscSender = udp_client.UDPClient(ip, port)
     rate, data = signal_load(path)
+    print(f"{data.shape=}")
 
     stime = time.perf_counter()
 
@@ -28,6 +24,7 @@ def run(path, ip, port):
     while True:
         offset = time.perf_counter() - stime
         sample_nr = int(offset * rate)
+        print(sample_nr)
 
         # Stop if we pass data size
         if sample_nr >= data.shape[1]:
@@ -35,7 +32,7 @@ def run(path, ip, port):
 
         slices = data[:, sample_nr]
 
-        bundle = osc_bundle_builder.OSCBundleBuilder(
+        bundle = osc_bundle_builder.OscBundleBuilder(
             osc_bundle_builder.IMMEDIATELY
         )
         for ch in range(data.shape[0]):
