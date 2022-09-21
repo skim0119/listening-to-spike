@@ -6,7 +6,7 @@ waiting for 1 seconds between each value.
 import random
 import time
 
-from pythonosc import osc_message_builder, udp_client
+from pythonosc import osc_message_builder, udp_client, osc_bundle_builder
 from spike_load import signal_load
 
 
@@ -35,9 +35,16 @@ def run(path, ip, port):
 
         slices = data[:, sample_nr]
 
+        bundle = osc_bundle_builder.OSCBundleBuilder(
+            osc_bundle_builder.IMMEDIATELY
+        )
         for ch in range(data.shape[0]):
             msg = osc_message_builder.OscMessageBuilder(
                 address=f"/channel{ch}"
             )
             msg.add_arg(int(slices[ch]))
-            oscSender.send(msg.build())
+            bundle.add_content(msg.build())
+            # oscSender.send(msg.build())
+
+            bundle.add_content(bundle.build())
+        oscSender.send(bundle.build())
