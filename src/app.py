@@ -16,7 +16,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from listening_to_spike.osc_control import run
+from listening_to_spike.osc_control import run, test_run
 
 
 class OSCSetup(QWidget):
@@ -177,7 +177,8 @@ class MainWindow(QMainWindow):
     def play(self):
         ip = self.osc_widget.ip
         port = self.osc_widget.port
-        run(self._data_path, ip, port)
+        test_run(ip, port)  # Debugging
+        # run(self._data_path, ip, port)
 
     @Slot()
     def _ensure_stopped(self):

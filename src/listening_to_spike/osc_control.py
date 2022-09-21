@@ -6,15 +6,38 @@ waiting for 1 seconds between each value.
 import random
 import time
 
-from pythonosc import udp_client
+from pythonosc import osc_message_builder, udp_client
 from spike_load import signal_load
 
 
-def run(path, ip, port):
-    signal = signal_load(path)
-
+def test_run(ip, port):
     client = udp_client.SimpleUDPClient(ip, port)
 
     for x in range(10):
         client.send_message("/filter", random.random())
         time.sleep(1)
+
+
+def run(path, ip, port):
+    oscSender = udp_client.UDPClient(ip, port)
+    rate, data = signal_load(path)
+
+    stime = time.perf_counter()
+
+    sample_nr = 0
+    while True:
+        offset = time.perf_counter() - stime
+        sample_nr = int(offset * rate)
+
+        # Stop if we pass data size
+        if sample_nr >= data.shape[1]:
+            break
+
+        slices = data[:, sample_nr]
+
+        for ch in range(data.shape[0]):
+            msg = osc_message_builder.OscMessageBuilder(
+                address=f"/channel{ch}"
+            )
+            msg.add_arg(int(slices[ch]))
+            oscSender.send(msg.build())
