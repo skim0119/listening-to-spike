@@ -55,6 +55,14 @@ class OSCSetup(QWidget):
     def change_port(self, text):
         self._port = text
 
+    @property
+    def ip(self):
+        return self._ip
+
+    @property
+    def port(self):
+        return int(self._port)
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -167,7 +175,9 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def play(self):
-        run(self._data_path)
+        ip = self.osc_widget.ip
+        port = self.osc_widget.port
+        run(self._data_path, ip, port)
 
     @Slot()
     def _ensure_stopped(self):
