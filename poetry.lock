@@ -498,7 +498,10 @@ optional = false
 python-versions = ">=3.8"
 
 [package.dependencies]
-numpy = {version = ">=1.20.3", markers = "python_version < \"3.10\""}
+numpy = [
+    {version = ">=1.21.0", markers = "python_version >= \"3.10\""},
+    {version = ">=1.20.3", markers = "python_version < \"3.10\""},
+]
 python-dateutil = ">=2.8.1"
 pytz = ">=2020.1"
 
@@ -1098,8 +1101,8 @@ python-versions = "*"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.9"
-content-hash = "49fef32eabf76c0e450b632cbe2c29a4d73742fd44ef3cf3ff2a0068f0c2647e"
+python-versions = "^3.9,<3.11"
+content-hash = "df2b36dba509db5bfd087d165024f6974e85eca2b0d2aec846a92fd3ef8eafa2"
 
 [metadata.files]
 altgraph = [

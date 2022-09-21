@@ -10,7 +10,7 @@ readme = "README.md"
 osc-listener = "scripts.osc_listener:main"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.9,<3.11"
 numpy = "^1.23.3"
 miv-os = "^0.2.1"
 python-osc = "^1.8.0"
