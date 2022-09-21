@@ -30,13 +30,15 @@ o --> e
 
 > At this moment, we only support `Mac-OS` for single-file installation. For other OSs, user can install the package and dependencies using `poetry`.
 
-The installation package (`.dmz` file) can be found [here](https://github.com/skim0119/listening-to-spike/releases).
+The installation package (`.dmg` file) can be found [here](https://github.com/skim0119/listening-to-spike/releases).
 
 ## How to Use
 
 1. Select spike-recording to load. (This process can take some time, depending on the size of the signal)
 2. Configure IP and port number for OSC protocol.
 3. Click play (_stop button is not functioning at this point_)
+
+<img width="825" alt="image" src="https://user-images.githubusercontent.com/3798023/191491697-6de802fd-6609-41c4-a432-c11c4463fd75.png">
 
 ## Debugging
 
