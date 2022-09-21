@@ -25,13 +25,20 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: Install dependencies
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry install
+
       - name: PyInstaller
-        uses: JackMcKew/pyinstaller-action-linux@main
-        with:
-          path: src
-            
+        run: |
+          pyinstaller src/app.spec
+
       - name: Upload Build
         uses: actions/upload-artifact@v3
         with:
           name: Application Build
-          path: src/dist/*
+          path: dist/*
