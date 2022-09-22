@@ -1,10 +1,9 @@
-import numpy as np
 from miv.io import DataManager
 from miv.signal.filter import ButterBandpass
 
 
 def signal_load(path):  # TODO: read actual data
-    filters = ButterBandpass(lowcut=300, highcut=3000, order=4)
+    filters = ButterBandpass(lowcut=400, highcut=2500, order=2)
 
     data = DataManager(path)[0]
     with data.load() as (signal, timestamps, sampling_rate):
