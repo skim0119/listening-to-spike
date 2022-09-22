@@ -40,6 +40,17 @@ The installation package (`.dmg` file) can be found [here](https://github.com/sk
 
 <img width="825" alt="image" src="https://user-images.githubusercontent.com/3798023/191491697-6de802fd-6609-41c4-a432-c11c4463fd75.png">
 
+## Data Structure
+
+| Address                   | Data Type | At        | Note                       |
+| :--:                      | :--:      | :--:      | :--:                       |
+| /channel                  |           | per cycle |                            |
+| /channel/<channel number> | float32   |           | Per cycle, Per channel     |
+| /analysis                 |           | last      |                            |
+| /analysis/rate_average    | double    |           | True sampling rate average |
+| /analysis/rate_deviation  | double    |           | True sampling rate std     |
+| /analysis/total_playtime  | double    |           | Total play time            |
+
 ## Debugging
 
 ### OSC Server
