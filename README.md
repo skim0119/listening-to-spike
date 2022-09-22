@@ -43,9 +43,9 @@ The installation package (`.dmg` file) can be found [here](https://github.com/sk
 ## Data Structure
 
 | Address                   | Data Type | At        | Note                       |
-| :--:                      | :--:      | :--:      | :--:                       |
+| :--                       | :--:      | :--:      | :--:                       |
 | /channel                  |           | per cycle |                            |
-| /channel/<channel number> | float32   |           | Per cycle, Per channel     |
+| /channel/0 ~ (num_channel)| float32   |           | Per cycle, Per channel     |
 | /analysis                 |           | last      |                            |
 | /analysis/rate_average    | double    |           | True sampling rate average |
 | /analysis/rate_deviation  | double    |           | True sampling rate std     |
